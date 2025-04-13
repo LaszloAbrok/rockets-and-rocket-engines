@@ -18,7 +18,7 @@
 
 % Title and Author
 \title{Rakéták, rakéta hajtóművek\\ 1. házifeladat}
-\author{Ábrók László\\ JPWF8N}
+\author{Ábrók László Patrik\\ JPWF8N}
 \date{2025.04.13.} % Date of submission
 %\date{\today}
 
@@ -37,7 +37,7 @@ A feladat elvégzéséhez a Python programozási nyelvet használtam. Az egyes k
 A megoldáshoz a következő könyvtárakat használtam:
 \begin{itemize}
     \item \texttt{numpy} - numerikus számításokhoz
-    \item \texttt{scipy} - numerikus közelítő megoldáshoz
+    \item \texttt{scipy} - közelítő megoldáshoz
     \item \texttt{matplotlib} - grafikonok készítéséhez
     \item \texttt{pandas} - adatok kezeléséhez
 \end{itemize}
@@ -50,7 +50,7 @@ A szükséges könyvtárak elérhetőek egy requirements.txt fájlban, amelyet a
 pip install -r requirements.txt
 \end{verbatim}
 
-Az adatokat egy json fájlban tároltam, amelyet a notebookban beolvasok. A json fájl tartalmazza a következő adatokat:
+Az adatokat egy json fájlban tároltam, amelyet a notebookban beolvasok. A json fájl tartalma a következő:
 \begin{verbatim}
     {
         "t_muk": 40,
@@ -70,8 +70,8 @@ Az adatokat egy json fájlban tároltam, amelyet a notebookban beolvasok. A json
 A feladatleírásban felsorolt mértékegységeket SI-ben adtam meg.
 
 \section{Karakreterisztikus sebesség}
-A karakterisztikus sebesség c\* azt adja meg,\\ hogy milyen hatékonyan képes a hajtómű
-a hőenergiát mozási energiává alakítani. Ez a jellemző a torokeresztmetszettől és tömegáramtól függ.
+A karakterisztikus sebesség azt adja meg, hogy milyen hatékonyan képes a hajtómű
+a hőenergiát mozási energiává alakítani. Ez a jellemző a torok méretétől és tömegáramtól függ.
 \\Tömegáram kiszámítása:
 \[
 \dot{m} = \frac{m_0 - m_{\text{evp}}}{t_{\text{muk}}}
@@ -79,7 +79,7 @@ a hőenergiát mozási energiává alakítani. Ez a jellemző a torokeresztmetsz
 \[
 \dot{m} = \frac{1289 - 215}{40} = 26.85 \text{ kg/s}
 \]
-\\Torokkeresztmetszet kiszámítása:
+\\A torok méretének kiszámítása:
 \[
 A_t = \frac{\dot{m}}{p_1 \cdot \sqrt{\frac{k}{R \cdot T_1}} \cdot \left( \frac{2}{k+1} \right)^{\frac{k+1}{2(k-1)}}}
 \]
@@ -91,11 +91,11 @@ A_t = \frac{26.85}{7000000 \cdot \sqrt{\frac{1.21}{332.56 \cdot 2733.15}} \cdot 
 c^* = \frac{p_1 \cdot A_t}{\dot{m}}
 \]
 \[
-c^* = \frac{7000000 \cdot 0.0056}{26.85} = 1464.6904 \text{ m/s}
+c^* = \frac{7000000 \cdot 0.0056}{26.85} = 1465.6904 \text{ m/s}
 \]
 
 \section{A torokkeresztmetszet jellemzői}
-A tömegáram és torokkeresztmetszet már az előző részben kiszámításra került.\\
+A tömegáram már az előző részben kiszámításra került.\\
 A torokátmérő kiszámítása:
 \[
 d_t = \sqrt{\frac{4 \cdot A_t}{\pi}}
@@ -122,11 +122,11 @@ Sűrűség:
 \rho_t = \frac{p_t}{R \cdot T_t}
 \]
 \[
-\rho_t = \frac{3937755.2917}{332.56 \cdot 2473.4389} = 4.8231 \text{ kg/m}^3
+\rho_t = \frac{3937755.2917}{332.56 \cdot 2473.4389} = 4.7872 \text{ kg/m}^3
 \]
 
 \section{Kilépő nyomás és optimális magasság}
-A kilépő nyomás meghatározásához szükség van a kilépő Mach szám meghatározásához. Ezt analaítikus módon nem lehet megoldani, ezért iteratív eljárását használtam. A következő egyenlet nem oldható meg zárt alakban:
+A kilépő nyomás meghatározásához szükség van a kilépő Mach szám meghatározására. Ezt analaítikus módon nem lehet megoldani, ezért iteratív eljárását használtam. A következő egyenlet nem oldható meg zárt alakban:
 \[
 f(M) = \frac{1}{M} \cdot \left( \frac{2}{k+1} \left(1 + \frac{k-1}{2}M^2 \right) \right)^{\frac{k+1}{2(k-1)}} - \varepsilon
 \]
@@ -136,8 +136,8 @@ Ezért a következő egyenletet oldottam meg gyökkereséssel:
 f(M_e) = 0 \quad \Rightarrow \quad \varepsilon = \frac{1}{M_e} \cdot \left( \frac{2}{k+1} \left(1 + \frac{k-1}{2}M_e^2 \right) \right)^{\frac{k+1}{2(k-1)}}
 \]
 
-A megoldáshoz a \textit{scipy} könyvtár \texttt{fsolve} függvényét használtam, 3.0 kezdeti értékkel.\\
-
+A megoldáshoz a \textit{scipy} könyvtár \texttt{fsolve} függvényét használtam, 3.0 kezdeti értékkel.
+Ennek eredménye:
 \[
 M_e = 3.4373
 \]
@@ -160,7 +160,7 @@ p(h) = p_0 \left(1 - \frac{L \cdot h}{T_0} \right)^{\frac{g M}{R L}}
 Ebből kifejezve a magasságot:
 
 \[
-h = \frac{T_0}{L} \left( 1 - \left( \frac{p_2}{p_0} \right)^{\frac{R L}{g M}} \right)
+h_{opt} = \frac{T_0}{L} \left( 1 - \left( \frac{p_2}{p_0} \right)^{\frac{R L}{g M}} \right)
 \]
 
 A következő konstansokat használtam:
@@ -186,7 +186,7 @@ R & 8.31446 & \text{J/mol·K} \\
 \]
 
 \[
-h = \frac{288.15}{0.0065} \left( 1 - \left( \frac{67.0423800}{101325} \right)^{\frac{287.05 \cdot 0.0065}{9.81 \cdot 0.0289644}} \right) = 3349.6154 \text{ m}
+h_{opt} = \frac{288.15}{0.0065} \left( 1 - \left( \frac{67.0423800}{101325} \right)^{\frac{287.05 \cdot 0.0065}{9.81 \cdot 0.0289644}} \right) = 3349.6154 \text{ m}
 \]
 
 \section{Tolóerő és tolóerőtényező}
@@ -204,7 +204,7 @@ w  = \frac{F_t - (p_2 - p_0) \cdot A_2}{\dot{m}}
 \[ w = \frac{62250 - (67042.3800 - 101325) \cdot 0.0675}{26.85} = 2404.5747 \text{ m/s} \]
 
 A kilépő sebesség segítségével minden egyes vizsgált magasságra kiszámítottam a tolóerőt a tolóerő egyentlet segítségével.
-A nyomás adatott magasságon történő meghatározásához a következő egyenletet használta fel:
+A nyomás adott magasságon történő meghatározásához a következő egyenletet használtam fel:
 \[ p = p_0 \left(1 - \frac{T_0 L h}{R L g M}\right)^{\frac{g M}{R L}} \]
 A tolóerőtényezőket pedig a következő összefüggéssel számoltam:
 \[
