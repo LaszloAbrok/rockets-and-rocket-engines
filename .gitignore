@@ -4,6 +4,5 @@
 /hw-1/doc/latex/*.log
 /hw-1/doc/latex/*.out
 /hw-1/doc/latex/*.toc
-/hw-1/doc/latex/*.pdf
 /hw-1/doc/latex/*.synctex.gz
 hw-1/data/df.csv
