@@ -6,3 +6,11 @@
 /hw-1/doc/latex/*.toc
 /hw-1/doc/latex/*.synctex.gz
 hw-1/data/df.csv
+/hw-2/data/export/
+/hw-2/doc/latex/*.aux
+/hw-2/doc/latex/*.log
+/hw-2/doc/latex/*.out
+/hw-2/doc/latex/*.toc
+/hw-2/doc/latex/*.synctex.gz
+hw-2/data/df.csv
+
